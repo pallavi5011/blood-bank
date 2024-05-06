@@ -217,4 +217,27 @@ const getOrgnaisationForHospitalController = async (req, res) => {
   }
 };
 
-module.exports = { createInventoryController, getInventoryController,getDonarsController, getHospitalController,getOrgnaisationController,getOrgnaisationForHospitalController };
+const getInventoryHospitalController = async (req, res) => {
+  try {
+    const inventory = await inventoryModel
+      .find(req.body.filters)
+      .populate("donar")
+      .populate("hospital")
+      .populate("organisation")
+      .sort({ createdAt: -1 });
+    return res.status(200).send({
+      success: true,
+      messaage: "get hospital comsumer records successfully",
+      inventory,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: "Error In Get consumer Inventory",
+      error,
+    });
+  }
+};
+
+module.exports = { createInventoryController, getInventoryController,getDonarsController, getHospitalController,getOrgnaisationController,getOrgnaisationForHospitalController,getInventoryHospitalController };
