@@ -8,6 +8,7 @@ import ProtectedRoute from './components/Routes/ProtectedRoute';
 import PublicRoute from './components/Routes/PublicRoute';
 import Donar from './pages/Dashboard/Donar';
 import Hospitals from './pages/Dashboard/Hospitals';
+import OrganisationPage from './pages/Dashboard/OrganisationPage';
 
 
 function App() {
@@ -15,16 +16,21 @@ function App() {
     <>
       <ToastContainer />
       <Routes>
-      <Route path='/hospital' element={
+        <Route path='/hospital' element={
           <ProtectedRoute>
-            <Hospitals/>
+            <Hospitals />
           </ProtectedRoute>
         } />
-
-
-      <Route path='/donar' element={
+        <Route
+          path="/orgnaisation"
+          element={
+            <ProtectedRoute>
+              <OrganisationPage />
+            </ProtectedRoute>
+          } />
+        <Route path='/donar' element={
           <ProtectedRoute>
-            <Donar/>
+            <Donar />
           </ProtectedRoute>
         } />
         <Route path='/' element={
